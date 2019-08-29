@@ -88,7 +88,9 @@ int main()
 			string fn = "log_" + ds + "_"+string(localCopy->mTrackLocation) + "_" + string(localCopy->mCarName) + ".csv";
 			bLoggStarted = true;
 			loggout.open("C:\\temp\\" + fn);
-			loggout << "Time,nSequence,LapTime,vCar,nEngine,aPedal,aBrake,aSteering,nFuelLevel,vCarY,vVarZ" << endl;
+			loggout << "Time,nSequence,xPosX,xPosY,xPosZ,xLap,nRacePos,nLapCompleted,nLap,nSector,LapTime,vCar,nEngine,aPedal,aBrake,aSteeringnFuelLevel,vCarX,vCarY,vCarZ,aX,aY,aZ,nX,nY,nZ,xWheelFL,xWheelFR,xWheelRL,xWheelRR" << endl;
+			loggout << "Sec,x,m,m,m,m,x,x,x,x,Sec,kmh,rpm,%,%,%,%,kmh,kmh,kmh,m/s^2,m/s^2,m/s^2,m,m,m,m,m,m,m/s^2" << endl;
+			loggout << "Timing,Timing,Location,Location,Location,Location,Timing,Timing,Timing,Location,Timing,Chassis,Engine,Chassis,Chassis,Chassis,Engine,Location,Location,Location,Chassis,Chassis,Chassis,Chassis,Chassis,Chassis,Tire,Tire,Tire,Tire" << endl;		
 		}
 		
 		if (localCopy->mGameState == 2 && indexChange >=2 )
@@ -99,6 +101,14 @@ int main()
 			elapsedTime = (t2.QuadPart - t1.QuadPart) * 1000.0 / frequency.QuadPart;
 			loggout << elapsedTime/1000 << ",";
 			loggout << localCopy->mSequenceNumber << ",";
+			loggout << localCopy->mParticipantInfo[0].mWorldPosition[0] << ",";
+			loggout << localCopy->mParticipantInfo[0].mWorldPosition[1] << ",";
+			loggout << localCopy->mParticipantInfo[0].mWorldPosition[2] << ","
+			loggout << localCopy->mParticipantInfo[0].mCurrentLapDistance << ",";
+			loggout << localCopy->mParticipantInfo[0].mRacePosition << ",";
+			loggout << localCopy->mParticipantInfo[0].mLapsCompleted << ",";
+			loggout << localCopy->mParticipantInfo[0].mCurrentLap << ",";
+			loggout << localCopy->mParticipantInfo[0].mCurrentSector << ",";
 			loggout << localCopy->mCurrentTime << ",";
 			loggout << localCopy->mSpeed << ",";
 			loggout << localCopy->mEngineSpeed << ",";
